@@ -3,7 +3,7 @@ package libspatialindex;
 import java.io.File;
 import java.util.Vector;
 
-public static class LibSpatialIndex  {
+public class LibSpatialIndex {
     static {
         String path = "./libjlibspatialindex.jnilib";
         try {
@@ -28,11 +28,11 @@ public static class LibSpatialIndex  {
         native static public long MemoryStorageManager();
     }
 
-    abstract class _AJNIObject {
+    abstract public static class _AJNIObject {
         protected long instance;
     }
 
-    abstract class AJNIObject extends _AJNIObject {
+    abstract public static class AJNIObject extends _AJNIObject {
         abstract protected void dispose();
 
         protected void deRef() {
@@ -49,45 +49,45 @@ public static class LibSpatialIndex  {
         }
     }
 
-    public class IShape extends AJNIObject {
+    public static class IShape extends AJNIObject {
         public IShape(long inst) {
             instance = inst;
         }
         native protected void dispose();
     }
 
-    public class Point extends IShape {
+    public static class Point extends IShape {
         public Point(double[] coords) {
             super(Constructors.Point(coords, coords.length));
         }
     }
 
-    abstract class IStorageManager extends AJNIObject {
+    abstract public static class IStorageManager extends AJNIObject {
         native protected void dispose();
     }
 
-    class MemoryStorageManager extends IStorageManager {
+    public static class MemoryStorageManager extends IStorageManager {
         public MemoryStorageManager() {
             instance = Constructors.MemoryStorageManager();
         }
     }
 
-    public class PropertySet {
+    public static class PropertySet {
     }
 
-    public enum RTreeType {
+    public static enum RTreeType {
         RV_LINEAR(0),
         RV_QUADRATIC(1),
         RV_RSTAR(2);
 
         private final int value;
 
-        private RTree(int value) {
+        private RTreeType(int value) {
             this.value = value;
         }
     }
 
-    class RTree extends ISpatialIndex {
+    static class RTree extends ISpatialIndex {
         private RTree(long i) {
             super();
             instance = i;
@@ -102,10 +102,16 @@ public static class LibSpatialIndex  {
             this(Constructors.RTree(storageManager, fillFactor, indexCapacity,
                     leafCapacity, dimension, rtreeVariant));
         }
+
+        public RTree(IStorageManager storageManager, double fillFactor,
+                     int indexCapacity, int leafCapacity, int dimension, RTreeType rtreeVariant) {
+            this(Constructors.RTree(storageManager, fillFactor, indexCapacity,
+                    leafCapacity, dimension, rtreeVariant.value));
+        }
     }
 
 
-    abstract class ISpatialIndex extends AJNIObject {
+    abstract public static class ISpatialIndex extends AJNIObject {
         native protected void dispose();
 
         native void insertData(byte[] pData, IShape shape, long shapeId);
@@ -123,7 +129,7 @@ public static class LibSpatialIndex  {
     }
 
     //DO NOT HOLD REFERENCE!
-    class INode extends _AJNIObject {
+    public static class INode extends _AJNIObject {
         private INode(long i) {
             super();
             instance = i;
@@ -146,7 +152,7 @@ public static class LibSpatialIndex  {
     }
 
     //DO NOT HOLD REFERENCE!
-    class IData extends _AJNIObject {
+    public static class IData extends _AJNIObject {
         private IData(long i) {
             super();
             instance = i;
@@ -160,7 +166,7 @@ public static class LibSpatialIndex  {
         }
     }
 
-    abstract class IVisitor extends AJNIObject {
+    abstract public static class IVisitor extends AJNIObject {
         public IVisitor() {
             instance = Constructors.IVisitor(this);
         }
@@ -188,7 +194,7 @@ public static class LibSpatialIndex  {
 
     }
 
-    class DataVisitor extends IVisitor {
+    public static class DataVisitor extends IVisitor {
         public DataVisitor() {
             super();
         }

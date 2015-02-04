@@ -1,5 +1,7 @@
 *.class
 *.log
+*.xcodeproj
+
 
 .idea
 ._*
@@ -18,3 +20,5 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
+
+jlibspatialindex/include/jni_libspatialindex.h

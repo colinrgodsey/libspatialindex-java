@@ -1,0 +1,7 @@
+javah -jni -o ./jlibspatialindex/include/jni_libspatialindex.h \
+	-classpath ./target/scala-2.11/classes/ \
+	 libspatialindex.LibSpatialIndex$RTree libspatialindex.LibSpatialIndex$ISpatialIndex libspatialindex.LibSpatialIndex$IStorageManager \
+	 libspatialindex.LibSpatialIndex$PropertySet libspatialindex.LibSpatialIndex$MemoryStorageManager libspatialindex.LibSpatialIndex$Point \
+	 libspatialindex.LibSpatialIndex$Constructors libspatialindex.LibSpatialIndex$IVisitor libspatialindex.LibSpatialIndex$INode \
+	 libspatialindex.LibSpatialIndex$IData libspatialindex.LibSpatialIndex$IShape
+
